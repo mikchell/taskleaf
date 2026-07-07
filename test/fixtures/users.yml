@@ -3,9 +3,11 @@
 one:
   name: テストユーザー1
   email: user1@example.com
-  password_digest: MyString
+  password_digest: <%= BCrypt::Password.create("password") %>
+  admin: true
 
 two:
   name: テストユーザー2
   email: user2@example.com
-  password_digest: MyString
+  password_digest: <%= BCrypt::Password.create("password") %>
+  admin: false
