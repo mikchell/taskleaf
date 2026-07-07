@@ -26,9 +26,9 @@ class Admin::UsersController < ApplicationController
   end
 
   def update
-    @user = User.new(user_params)
+    @user = User.find(params[:id])
 
-    if @user.save
+    if @user.update(user_params)
       redirect_to admin_user_url(@user), notice: "ユーザー「#{@user.name}」を更新しました。"
     else
       render :edit
@@ -44,6 +44,9 @@ class Admin::UsersController < ApplicationController
   private
 
   def user_params
-    params.require(:user).permit(:name, :email, :admin, :password, :password_confirmation)
+    params.require(:user).permit(:name, :email, :admin, :password, :password_confirmation).tap do |p|
+      p.delete(:password) if p[:password].blank?
+      p.delete(:password_confirmation) if p[:password_confirmation].blank?
+    end
   end
 end
