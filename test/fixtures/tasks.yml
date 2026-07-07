@@ -2,7 +2,7 @@
 
 one:
   name: MyString
-  description: MyText
+  description: MyText https://example.com
   user: one
 
 two:
